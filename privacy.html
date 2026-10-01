@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="logo.png"><link rel="stylesheet" href="_style.css"><title>Privacy Policy &mdash; Delilah Home</title></head><body><div class="wrap"><header><img src="logo.png" alt="Delilah"><div><h1>Delilah Home</h1><p>A private, self-hosted assistant for one household</p></div></header>
-<h1 style="font-size:22px;margin:0 0 6px">Privacy Policy</h1><p class="muted">Effective 25 September 2026</p>
+<h1 style="font-size:22px;margin:0 0 6px">Privacy Policy</h1><p class="muted">Effective 1 October 2026</p>
 <p>Delilah Home ("Delilah") is a private, non-commercial assistant operated by one family on a self-hosted server in a private residence. This policy explains exactly what data Delilah accesses, why, where it is stored, and how to remove it.</p>
 
 <h2>Who this applies to</h2>
@@ -9,7 +9,8 @@
 <p>Delilah requests these scopes, and uses them only as described:</p>
 <table><tr><th>Scope</th><th>Why</th></tr>
 <tr><td><code>calendar</code></td><td>Read your events to answer questions; create or change events when you ask.</td></tr>
-<tr><td><code>gmail.send</code></td><td>Send a message only when you explicitly ask Delilah to send it. Delilah <strong>cannot read your mail</strong>.</td></tr>
+<tr><td><code>gmail.send</code></td><td>Send a message only when you explicitly ask Delilah to send it.</td></tr>
+<tr><td><code>gmail.readonly</code></td><td>Read your mail <strong>only when you ask</strong>, in two ways. <em>&ldquo;Check my email&rdquo;</em>: Delilah fetches the sender, subject, date and Gmail&rsquo;s short preview line for your most recent messages (10 by default), or for messages matching a search you give it &mdash; it does not open the full message. <em>&ldquo;Scan my email for packages&rdquo;</em>: Delilah searches the last 7 days (up to 30 if you ask) for up to 50 shipping-related messages, reads their text to find carrier tracking numbers, and keeps <strong>only the tracking number and carrier</strong>. This permission is read-only: Delilah cannot delete, change or label your mail with it, and nothing reads your mail in the background.</td></tr>
 <tr><td><code>drive.file</code></td><td>Create and modify only the files Delilah itself makes, or ones you explicitly hand it. Delilah <strong>cannot see the rest of your Drive</strong>.</td></tr>
 <tr><td><code>tasks</code></td><td>Read and update your task lists.</td></tr>
 <tr><td><code>contacts.readonly</code></td><td>Resolve names to addresses so "email Mom" works.</td></tr>
@@ -17,23 +18,23 @@
 <p>Delilah accesses this data <strong>only to fulfil a request made by the account's own owner</strong>. One household member's request never reads another member's Google data.</p>
 
 <h2>Scopes we deliberately do not request</h2>
-<p>Delilah does <strong>not</strong> request any of Google's <em>restricted</em> scopes. It cannot read your mailbox (<code>gmail.readonly</code>), and it cannot browse your Drive (<code>drive.readonly</code>). These were removed on 25 September 2026 to keep Delilah's access as narrow as the features actually require.</p>
+<p>Delilah requests exactly one of Google's <em>restricted</em> scopes, <code>gmail.readonly</code>, added on 1 October 2026 for the two email features described above. It does <strong>not</strong> request full Gmail access (<code>gmail.modify</code> or full mailbox control), and it cannot browse your Drive (<code>drive.readonly</code>), which was removed on 25 September 2026 to keep Delilah's access as narrow as the features actually require.</p>
 <h2>Limited Use disclosure</h2>
-<div class="card">Delilah's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements. Specifically: Google user data is <strong>never</strong> sold, <strong>never</strong> transferred to third parties, <strong>never</strong> used for advertising, and <strong>never</strong> used to train, fine-tune or evaluate any machine-learning model.</div>
+<div class="card">Google user data is <strong>never</strong> sold and <strong>never</strong> used for advertising. However, Delilah does <strong>not yet fully meet</strong> the Limited Use requirements of the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, and we would rather say so plainly: (1) when Delilah answers a request using your Google data &mdash; including the senders, subjects and preview lines it read from your email &mdash; that exchange can be saved on the household server in a log of example conversations that the operator may use to improve Delilah's own language model; and (2) if a later request is escalated to an external model provider (see <em>Third parties</em>), recent conversation turns, which may mention details from your email, can be sent along with it. This notice will be updated when either changes.</div>
 
 <h2>Where data is stored</h2>
 <ul>
 <li>OAuth tokens are encrypted with Fernet (AES) before being written, and stored in a PostgreSQL database on the household server. That database is not reachable from the internet.</li>
-<li>Message and file contents retrieved from Google are held only in memory for the duration of the request. Delilah does not build a copy of your mailbox or Drive.</li>
+<li>Message and file contents retrieved from Google are held only in memory for the duration of the request. Delilah does not build a copy of your mailbox or Drive. The exceptions: tracking numbers and carriers found by a package scan are saved so Delilah can follow those packages (if you ask for a package's status, only its tracking number is sent to the parcel-tracking service), and Delilah's replies to you, which may mention details of your email, are kept in conversation history.</li>
 <li>Conversation history with the assistant is stored locally so it can remember context. You can ask for it to be deleted.</li>
 <li>The server is in a private home, protected by encrypted storage and private-network access only.</li>
 </ul>
 
 <h2>What we never do</h2>
-<ul><li>Sell or rent your data &mdash; to anyone, ever</li><li>Share it with third parties, advertisers or brokers</li><li>Use it to train or improve any AI model</li><li>Run third-party analytics or tracking</li><li>Access an account other than in service of its own owner's request</li></ul>
+<ul><li>Sell or rent your data &mdash; to anyone, ever</li><li>Share it with third parties, advertisers or brokers</li><li>Use it to train any AI model other than Delilah's own (see the Limited Use disclosure above)</li><li>Run third-party analytics or tracking</li><li>Access an account other than in service of its own owner's request</li></ul>
 
 <h2>Third parties</h2>
-<p>The language model answering your requests normally runs locally on the household server. If a request is escalated to an external model provider, only the text of that request is sent &mdash; never your credentials, tokens or bulk account data. Those providers are contractually barred from training on the content.</p>
+<p>The language model answering your requests normally runs locally on the household server. If a request is escalated to an external model provider, the text of that request and recent conversation turns are sent &mdash; never your credentials, tokens or bulk account data. Those providers are contractually barred from training on the content.</p>
 
 <h2>Your control</h2>
 <ul>
@@ -50,4 +51,4 @@
 
 <h2>Contact</h2>
 <p>Questions or deletion requests: <a href="mailto:ryan.j.werner80@gmail.com">ryan.j.werner80@gmail.com</a></p>
-<footer>Delilah Home is a personal, non-commercial project operated by a single household.<br>Contact: <a href="mailto:ryan.j.werner80@gmail.com">ryan.j.werner80@gmail.com</a><br>Last updated 25 September 2026. <nav><a href="./">Home</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></footer></div></body></html>
+<footer>Delilah Home is a personal, non-commercial project operated by a single household.<br>Contact: <a href="mailto:ryan.j.werner80@gmail.com">ryan.j.werner80@gmail.com</a><br>Last updated 1 October 2026. <nav><a href="./">Home</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></footer></div></body></html>
